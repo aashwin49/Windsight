@@ -4,7 +4,10 @@ import math
 from datetime import timezone
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+REPO_ROOT = Path(__file__).resolve().parents[2]
+BACKEND_ROOT = REPO_ROOT / "backend"
+sys.path.insert(0, str(REPO_ROOT))
+sys.path.insert(1, str(BACKEND_ROOT))
 from fastapi.testclient import TestClient
 import backend.app.main as main
 from forecast_selector import calculate_cutoff, normalize_timestamp

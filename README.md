@@ -310,3 +310,11 @@ The project implementation, validation and deployment were reviewed as part of t
 - Explore procurement-relevant financial analysis using validated market and imbalance cost data.
 - Confirm decision-time and data-comparability assumptions with procurement users.
 
+## Video Demonstration
+
+[**Watch the Complete Windsight Project Demonstration on YouTube**](https://www.youtube.com/watch?v=4ol6y7jXVyE)
+
+The video is divided into two parts:
+
+- **Part 1 – Client Presentation:** Demonstrates the live dashboard, key features, wind generation comparisons, forecast accuracy insights, and business value.
+- **Part 2 – Technical Review:** Covers the project architecture, data sources, processing logic, forecast selection methodology, backend and frontend implementation, testing, and deployment.
