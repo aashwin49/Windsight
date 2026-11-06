@@ -4,9 +4,6 @@ import json
 import os
 import sys
 
-# The API entry point lives in backend/app, while the shared modules and data
-# files live one directory above it. Add that directory before importing them
-# so `uvicorn main:app` works when launched from backend/app.
 ROOT = Path(__file__).resolve().parent
 BACKEND_ROOT = ROOT.parent
 if str(BACKEND_ROOT) not in sys.path:
@@ -24,8 +21,7 @@ PROCESSED = BACKEND_ROOT / "processed" / "january_2026_processed.json"
 ACTUALS_PATH = BACKEND_ROOT / "raw" / "actual_generation.json"
 FORECASTS_PATH = BACKEND_ROOT / "raw" / "forecast_generation.json"
 app = FastAPI(title="Windsight API", version="1.0")
-# Configure comma-separated browser origins with CORS_ORIGINS. Local development
-# defaults remain useful when no deployment-specific value is supplied.
+
 allowed_origins = [
     origin.strip()
     for origin in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
@@ -67,7 +63,7 @@ def selected_data(delivery_date: date, cutoff_hour: int):
                      "actual_incomplete": not actual.get("is_complete", True),
                      "forecast_publish_time": chosen["publishTime"] if chosen else None,
                      "decision_cutoff": calculate_cutoff(start, cutoff_hour).isoformat()})
-    # Validate date against the Phase 3 processed window, rather than silently serving arbitrary source-only data.
+
     if not any(normalize_timestamp(r["startTime"]).date() == delivery_date for r in processed):
         raise HTTPException(404, f"No processed data available for delivery date {delivery_date.isoformat()}")
     return rows, day_forecasts
